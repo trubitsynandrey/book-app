@@ -1,10 +1,12 @@
-
+import { Outlet } from "react-router-dom";
+import { Footer } from "./components";
 
 function App() {
   return (
-    <h1 className="bg-slate-800">
-    Hello
-  </h1>
+    <div className="pt-[60px] relative">
+      <Outlet />
+      <Footer />
+    </div>
   );
 }
 

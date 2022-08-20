@@ -1,12 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AddbookScreen, AllBooksScreen, FavouriteBooksScreen } from "./pages";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="add-book" element={<AddbookScreen />} />
+        <Route path="all-books" element={<AllBooksScreen />} />
+        <Route path="favourite-books" element={<FavouriteBooksScreen />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );
-
