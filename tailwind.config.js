@@ -10,11 +10,18 @@ module.exports = {
       'white': '#FFFFFF',
       'green': '#62A420',
       'modalBackDrop': '#313131',
+      'redWarning': '#E62700',
+      'blue': '#0079B8',
     },
     borderRadius: {
       DEFAULT: '3px',
     },
-    extend: {},
+    extend: {
+      opacity: {
+        '85': '.85',
+      }
+
+    },
   },
   plugins: [],
 }

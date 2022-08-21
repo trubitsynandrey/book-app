@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DeleteInputValue, Header, Search } from "../../components";
 import { BookItem } from "../../components/book-item/book-item";
 
@@ -42,19 +42,21 @@ export const AddbookScreen = () => {
           </div>
         </div>
       </Header>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          {books?.map((book, idx) => (
-            <BookItem
-              key={book.id}
-              number={idx + 1}
-              title={book.volumeInfo.title}
-            />
-          ))}
-        </div>
-      )}
+      <div className="relative">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            {books?.map((book, idx) => (
+              <BookItem
+                key={book.id}
+                number={idx + 1}
+                title={book.volumeInfo.title}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -3,3 +3,4 @@ export { AllBooks } from "./all-books";
 export { FavouriteBooks } from "./favourite-books";
 export { Search } from "./search";
 export { DeleteInputValue } from "./delete-input-value";
+export { Close } from "./close";
