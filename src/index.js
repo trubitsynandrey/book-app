@@ -10,6 +10,7 @@ import {
   Authorization,
   FavouriteBooksScreen,
   SignUpScreen,
+  SignInScreen
 } from "./pages";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
     <Routes>
       <Route path="/" element={<Authorization />}>
       <Route path="sign-up" element={<SignUpScreen />} />
+      <Route path="sign-in" element={<SignInScreen />} />
       </Route>
 
       <Route path="app" element={<App />}>

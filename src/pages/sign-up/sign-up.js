@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "../../components";
 
 export const SignUpScreen = () => {
@@ -9,15 +9,24 @@ export const SignUpScreen = () => {
   const [repassword, setRepassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  const setTrueOnTime = (setName, ms = 1500) => {
+    setName(true)
+    setTimeout(() => {
+        setName(false)
+    }, ms)
+  }
 
   const navigate = useNavigate();
   const onSubmitHandle = async (e) => {
     e.preventDefault();
     console.log("submitted");
     setIsError(false);
+    setIsSuccess(false)
     if (email && name && password && repassword) {
       if (password !== repassword) {
-        setIsError(true);
+        setTrueOnTime(setIsError, 2000)
         setErrorMessage("The password confirmation does not match");
       } else {
         try {
@@ -30,14 +39,14 @@ export const SignUpScreen = () => {
             .then((res) => res.json())
             .then((res) => {
               if (res?.status === true) {
-                // navigate("sign-in")
-                console.log("its ok");
+                console.log(res, 'success')
+                setTrueOnTime(setIsSuccess)
+                setErrorMessage(res.data.message)
               } else {
-                console.log(res, "reserror");
-                console.log(res?.errors[Object.keys(res?.errors)[0]][0], "errors");
-                const firstErrorMessage = res?.errors[Object.keys(res?.errors)[0]][0]
-                setErrorMessage(firstErrorMessage)
-                setIsError(true)
+                const firstErrorMessage =
+                  res?.errors[Object.keys(res?.errors)[0]][0];
+                setErrorMessage(firstErrorMessage);
+                setTrueOnTime(setIsError, 2000)
               }
               console.log(res, "rres");
               return res.data;
@@ -48,7 +57,7 @@ export const SignUpScreen = () => {
       }
     } else {
       setErrorMessage("All fields are required");
-      setIsError(true);
+      setTrueOnTime(setIsError, 2000)
     }
   };
 
@@ -61,6 +70,7 @@ export const SignUpScreen = () => {
     <div className="relative px-[10%] h-[100vh] flex items-center">
       <div
         data-error={isError}
+        data-success={isSuccess}
         className="text-white text-[12px] absolute top-[-40px] text-center w-[80%] left-1/2 transform -translate-x-1/2 bg-alert flex h-[36px] items-center pl-[12px] opacity-0 transition-all"
       >
         <div>
@@ -115,16 +125,16 @@ export const SignUpScreen = () => {
           >
             SUBMIT
           </button>
-          <button
-            type="button"
-            className="h-9 bg-[#004366] rounded text-white tracking-[1px] text-[14px]"
-          >
-            LOGIN
-          </button>
+          <Link to="/sign-in" className="contents">
+            <button
+              type="button"
+              className="h-9 bg-[#004366] rounded text-white tracking-[1px] text-[14px]"
+            >
+              LOGIN
+            </button>
+          </Link>
         </div>
       </form>
     </div>
   );
 };
-
-export default SignUpScreen;

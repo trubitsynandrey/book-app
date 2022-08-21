@@ -22,3 +22,8 @@ div [data-error='true'] {
     opacity: 1;
     top: 30px;
 }
+div [data-success='true'] {
+    opacity: 1;
+    background-color: #62A420;
+    top: 30px;
+}
