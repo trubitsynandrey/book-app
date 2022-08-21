@@ -7,9 +7,9 @@ export const Footer = () => {
   return (
     <footer>
       <nav className="bg-palewhite flex justify-around items-center h-[60px] fixed w-full bottom-0">
-        <NavItem path={"/add-book"}><AddBook /></NavItem>
-        <NavItem path={"/all-books"}><AllBooks /></NavItem>
-        <NavItem path={"/favourite-books"}><FavouriteBooks /></NavItem>
+        <NavItem path={"/app/add-book"}><AddBook /></NavItem>
+        <NavItem path={"/app/all-books"}><AllBooks /></NavItem>
+        <NavItem path={"/app/favourite-books"}><FavouriteBooks /></NavItem>
       </nav>
     </footer>
   );

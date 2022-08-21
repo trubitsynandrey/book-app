@@ -12,6 +12,7 @@ module.exports = {
       'modalBackDrop': '#313131',
       'redWarning': '#E62700',
       'blue': '#0079B8',
+      'alert': '#C92100',
     },
     borderRadius: {
       DEFAULT: '3px',

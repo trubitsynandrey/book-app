@@ -8,3 +8,17 @@ html {
     margin: 0;
     padding: 0;
 }
+
+.active::before {
+    position: absolute;
+    content: '';
+    bottom: 10px;
+    height: 2px;
+    width: 24px;
+    background-color: #5C426C;
+}
+
+div [data-error='true'] {
+    opacity: 1;
+    top: 30px;
+}
