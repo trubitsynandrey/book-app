@@ -1,7 +1,7 @@
-import { matchPath, Outlet, useNavigate } from "react-router-dom";
-import { Footer } from "./components";
-import {useEffect} from 'react'
 import Cookies from "js-cookie";
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from "react-router-dom";
+import { Footer } from "./components";
 
 function App() {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ function App() {
     
   }, [])
   return (
-    <div className="pt-[60px] relative">
+    <div className="pt-[62px] relative">
       <Outlet />
       <Footer />
     </div>

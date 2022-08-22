@@ -9,14 +9,19 @@ export const AddbookScreen = () => {
   const handleDeleteInputValue = () => {
     setInputValue("");
   };
+
+
+  const handleDeleteFromList = (id) => {
+    setBooks(prev => prev.filter(book => book.id !== id))
+  }
   useEffect(() => {
     if (sessionStorage.getItem("inputValue")) {
       setInputValue(sessionStorage.getItem("inputValue"));
     }
     return () => {
-      if (inputValue === "") {
-        sessionStorage.removeItem("inputValue");
-      }
+      // if (inputValue === "") {
+        // sessionStorage.removeItem("inputValue");
+      // }
     };
   }, []);
 
@@ -37,15 +42,16 @@ export const AddbookScreen = () => {
     }, 300);
     return () => {
       clearTimeout(typeToFetchThrottle);
-      if (inputValue !== "") {
-        sessionStorage.setItem("inputValue", inputValue);
-      } else {
-        sessionStorage.removeItem("inputValue");
-      }
+      // if (inputValue !== "") {
+      //   sessionStorage.setItem("inputValue", inputValue);
+      // } else {
+      //   sessionStorage.removeItem("inputValue");
+      // }
     };
   }, [inputValue]);
 
-  console.log(books);
+  const isInputEmpty = inputValue === ""
+  const booksIsEmpty = !!books
   return (
     <>
       <Header>
@@ -64,6 +70,8 @@ export const AddbookScreen = () => {
         </div>
       </Header>
       <div className="relative">
+        {isInputEmpty && <p>Type something to start search...</p>}
+        {!isInputEmpty && !booksIsEmpty &&  <p>Nothing have found</p>}
         {isLoading ? (
           <Spinner offset={80} size={14} />
         ) : (
@@ -77,6 +85,7 @@ export const AddbookScreen = () => {
                 uid={book.id}
                 authors={book.volumeInfo.authors}
                 favorite={0}
+                deleteBook={handleDeleteFromList}
               />
             ))}
           </div>

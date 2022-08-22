@@ -4,3 +4,4 @@ export { FavouriteBooksScreen } from "./favourite-books";
 export { Authorization } from "./authorization";
 export { SignUpScreen } from "./sign-up";
 export { SignInScreen } from "./sign-in";
+export { InfoBookScreen } from "./info-book";

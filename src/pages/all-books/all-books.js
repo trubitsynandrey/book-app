@@ -5,6 +5,17 @@ import { Header, BookItem, Spinner } from "../../components";
 export const AllBooksScreen = () => {
   const [books, setBooks] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const handleDeleteBookById = (id) => {
+    setBooks(prev => prev.filter(book => book.id !== id))
+  }
+  const handleAddToFavourite = (id) => {
+  setBooks(prev => prev.map(book => {
+    if (book.id === id) {
+      return {...book, favorite: 1}
+    }
+    return book
+  }))
+  }
   useEffect(() => {
     setIsLoading(true);
     fetch("https://internsapi.public.osora.ru/api/book/list", {
@@ -38,6 +49,9 @@ export const AllBooksScreen = () => {
               authors={book.authors}
               favorite={book.favorite}
               isLibrary
+              id={book.id}
+              deleteBook={handleDeleteBookById}
+              addFavorite={handleAddToFavourite}
             />
           ))
         )}
