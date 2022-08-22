@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { DeleteInputValue, Header, Search } from "../../components";
+import { DeleteInputValue, Header, Search, Spinner } from "../../components";
 import { BookItem } from "../../components/book-item/book-item";
 
 export const AddbookScreen = () => {
   const [inputValue, setInputValue] = useState("");
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const handleDeleteInputValue = () => setInputValue("");
+  const handleDeleteInputValue = () => {
+    setInputValue("");
+  };
+  useEffect(() => {
+    if (sessionStorage.getItem("inputValue")) {
+      setInputValue(sessionStorage.getItem("inputValue"));
+    }
+    return () => {
+      if (inputValue === "") {
+        sessionStorage.removeItem("inputValue");
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (inputValue === "") {
       setBooks(null);
       return;
     }
+
     const typeToFetchThrottle = setTimeout(() => {
       setIsLoading(true);
       fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputValue}`)
@@ -21,7 +35,14 @@ export const AddbookScreen = () => {
           setIsLoading(false);
         });
     }, 300);
-    return () => clearTimeout(typeToFetchThrottle);
+    return () => {
+      clearTimeout(typeToFetchThrottle);
+      if (inputValue !== "") {
+        sessionStorage.setItem("inputValue", inputValue);
+      } else {
+        sessionStorage.removeItem("inputValue");
+      }
+    };
   }, [inputValue]);
 
   console.log(books);
@@ -44,7 +65,7 @@ export const AddbookScreen = () => {
       </Header>
       <div className="relative">
         {isLoading ? (
-          <p>Loading...</p>
+          <Spinner offset={80} size={14} />
         ) : (
           <div>
             {books?.map((book, idx) => (
@@ -52,6 +73,10 @@ export const AddbookScreen = () => {
                 key={book.id}
                 number={idx + 1}
                 title={book.volumeInfo.title}
+                description={book.volumeInfo.description}
+                uid={book.id}
+                authors={book.volumeInfo.authors}
+                favorite={0}
               />
             ))}
           </div>

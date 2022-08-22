@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert } from "../../components";
+import { Alert, Spinner } from "../../components";
 
 export const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ export const SignUpScreen = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const setTrueOnTime = (setName, ms = 1500) => {
     setName(true)
@@ -29,6 +30,7 @@ export const SignUpScreen = () => {
         setTrueOnTime(setIsError, 2000)
         setErrorMessage("The password confirmation does not match");
       } else {
+        setIsLoading(true)
         try {
           const result = await fetch(
             `https://internsapi.public.osora.ru/api/auth/signup?name=${name}&email=${email}&password=${password}&password_confirmation=${repassword}`,
@@ -53,6 +55,8 @@ export const SignUpScreen = () => {
             });
         } catch (e) {
           console.log(e, "errorMessage");
+        } finally {
+          setIsLoading(false)
         }
       }
     } else {
@@ -68,6 +72,7 @@ export const SignUpScreen = () => {
 
   return (
     <div className="relative px-[10%] h-[100vh] flex items-center">
+      {isLoading && <Spinner />}
       <div
         data-error={isError}
         data-success={isSuccess}

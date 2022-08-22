@@ -1,14 +1,14 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert } from "../../components";
+import { Alert, Spinner } from "../../components";
 
 export const SignInScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [isError, setIsError] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const setTrueOnTime = (setName, ms = 1500) => {
     setName(true);
@@ -17,13 +17,14 @@ export const SignInScreen = () => {
     }, ms);
   };
 
-  const onSubmitHandle = (e) => {
+  const onSubmitHandle = async (e) => {
     e.preventDefault();
     console.log("submitted");
-    setIsError(false)
+    setIsError(false);
+    setIsLoading(true);
     if (email && password) {
       try {
-        fetch(
+        await fetch(
           `https://internsapi.public.osora.ru/api/auth/login?email=${email}&password=${password}`,
           {
             method: "POST",
@@ -34,8 +35,8 @@ export const SignInScreen = () => {
             console.log(res, "authres");
             if (res?.status === true) {
               // coockie access
-              Cookies.set('ACCESS', res.data.access_token)
-              navigate("/app")
+              Cookies.set("ACCESS", res.data.access_token);
+              navigate("/app");
             } else {
               const errorMessage = res?.errors;
               setErrorMessage(errorMessage);
@@ -45,6 +46,8 @@ export const SignInScreen = () => {
           });
       } catch (e) {
         console.log(e, "errorMessage");
+      } finally {
+        setIsLoading(false);
       }
     } else {
       setErrorMessage("All fields are required");
@@ -55,9 +58,10 @@ export const SignInScreen = () => {
   const onChangeInput = (e, changeInput) => {
     changeInput(e.target.value);
   };
-
+console.log(isLoading, 'isLoading')
   return (
     <div className="relative px-[10%] h-[100vh] flex items-center">
+      {isLoading && <Spinner />}
       <div
         data-error={isError}
         className="text-white text-[12px] absolute top-[-40px] text-center w-[80%] left-1/2 transform -translate-x-1/2 bg-alert flex h-[36px] items-center pl-[12px] opacity-0 transition-all"
