@@ -1,25 +1,24 @@
 import Cookies from "js-cookie";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Footer } from "./components";
+import { BooksProvider, Footer } from "./components";
 
 function App() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    // проверка на кукис
-    // запрос с токеном?
-    if (Cookies.get('ACCESS')) {
-      navigate("add-book")
+    if (Cookies.get("ACCESS")) {
+      navigate("add-book");
     } else {
-      navigate("/")
+      navigate("/");
     }
-    
-  }, [])
+  }, []);
   return (
-    <div className="pt-[62px] relative">
-      <Outlet />
-      <Footer />
-    </div>
+    <BooksProvider>
+      <div className="pt-[62px] relative">
+        <Outlet />
+        <Footer />
+      </div>
+    </BooksProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../button";
 import { Modal } from "../modal";
 
@@ -19,6 +20,7 @@ export const BookItem = ({
   const [isModal, setIsModal] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [isModalFavourite, setIsModalFavourite] = useState(false);
+  const navigate = useNavigate()
   const handleCloseModal = () => {
     setIsModal(false);
   };
@@ -102,7 +104,8 @@ console.log(favorite, 'fav')
                 >
                   D
                 </button>
-                <button className="bg-blue h-[24px] w-[24px] rounded text-white text-[11px]">
+                <button className="bg-blue h-[24px] w-[24px] rounded text-white text-[11px]"
+                onClick={() => navigate(`/app/info-book/${id}`)}>
                   I
                 </button>
               </div>

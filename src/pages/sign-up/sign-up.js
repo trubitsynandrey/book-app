@@ -41,16 +41,15 @@ export const SignUpScreen = () => {
             .then((res) => res.json())
             .then((res) => {
               if (res?.status === true) {
-                console.log(res, 'success')
                 setTrueOnTime(setIsSuccess)
                 setErrorMessage(res.data.message)
+                navigate("/sign-in")
               } else {
                 const firstErrorMessage =
                   res?.errors[Object.keys(res?.errors)[0]][0];
                 setErrorMessage(firstErrorMessage);
                 setTrueOnTime(setIsError, 2000)
               }
-              console.log(res, "rres");
               return res.data;
             });
         } catch (e) {

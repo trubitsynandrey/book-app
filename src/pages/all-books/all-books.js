@@ -1,21 +1,24 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { Header, BookItem, Spinner } from "../../components";
+import { Header, BookItem, Spinner, useBooksContext } from "../../components";
 
 export const AllBooksScreen = () => {
-  const [books, setBooks] = useState(null);
+  // const [books, setBooks] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { books, setBooks } = useBooksContext();
   const handleDeleteBookById = (id) => {
-    setBooks(prev => prev.filter(book => book.id !== id))
-  }
+    setBooks((prev) => prev.filter((book) => book.id !== id));
+  };
   const handleAddToFavourite = (id) => {
-  setBooks(prev => prev.map(book => {
-    if (book.id === id) {
-      return {...book, favorite: 1}
-    }
-    return book
-  }))
-  }
+    setBooks((prev) =>
+      prev.map((book) => {
+        if (book.id === id) {
+          return { ...book, favorite: 1 };
+        }
+        return book;
+      })
+    );
+  };
   useEffect(() => {
     setIsLoading(true);
     fetch("https://internsapi.public.osora.ru/api/book/list", {
@@ -37,7 +40,7 @@ export const AllBooksScreen = () => {
       </Header>
       <div>
         {isLoading ? (
-          <Spinner offset={80} size={14} />
+          <Spinner />
         ) : (
           books?.map((book, idx) => (
             <BookItem

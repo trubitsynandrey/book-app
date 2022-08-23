@@ -11,6 +11,7 @@ export const AddbookScreen = () => {
   };
 
 
+
   const handleDeleteFromList = (id) => {
     setBooks(prev => prev.filter(book => book.id !== id))
   }
@@ -73,7 +74,7 @@ export const AddbookScreen = () => {
         {isInputEmpty && <p>Type something to start search...</p>}
         {!isInputEmpty && !booksIsEmpty &&  <p>Nothing have found</p>}
         {isLoading ? (
-          <Spinner offset={80} size={14} />
+          <Spinner />
         ) : (
           <div>
             {books?.map((book, idx) => (

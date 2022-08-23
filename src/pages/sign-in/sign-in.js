@@ -32,9 +32,7 @@ export const SignInScreen = () => {
         )
           .then((res) => res.json())
           .then((res) => {
-            console.log(res, "authres");
             if (res?.status === true) {
-              // coockie access
               Cookies.set("ACCESS", res.data.access_token);
               navigate("/app");
             } else {

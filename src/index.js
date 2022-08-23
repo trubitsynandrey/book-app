@@ -10,11 +10,13 @@ import {
   Authorization,
   FavouriteBooksScreen,
   SignUpScreen,
-  SignInScreen
+  SignInScreen,
+  InfoBookScreen
 } from "./pages";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+   
     <Routes>
       <Route path="/" element={<Authorization />}>
       <Route path="sign-up" element={<SignUpScreen />} />
@@ -25,6 +27,7 @@ root.render(
         <Route path="add-book" element={<AddbookScreen />} />
         <Route path="all-books" element={<AllBooksScreen />} />
         <Route path="favourite-books" element={<FavouriteBooksScreen />} />
+        <Route path="info-book/:id" element={<InfoBookScreen />} />
       </Route>
     </Routes>
   </BrowserRouter>

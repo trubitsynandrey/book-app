@@ -1,9 +1,9 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { Header, BookItem, Spinner } from "../../components";
+import { Header, BookItem, Spinner, useBooksContext } from "../../components";
 
 export const FavouriteBooksScreen = () => {
-  const [books, setBooks] = useState(null);
+  const { books, setBooks } = useBooksContext();
   const [isLoading, setIsLoading] = useState(false);
   const handleDeleteBookById = (id) => {
     setBooks(prev => prev.filter(book => book.id !== id))
@@ -37,7 +37,7 @@ export const FavouriteBooksScreen = () => {
       </Header>
       <div>
         {isLoading ? (
-          <Spinner offset={80} size={14} />
+          <Spinner />
         ) : (
           books?.filter(book => book.favorite === 1).map((book, idx) => (
             <BookItem

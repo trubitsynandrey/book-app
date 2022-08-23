@@ -4,3 +4,4 @@ export { Header } from "./header";
 export { Modal } from "./modal";
 export { BookItem } from "./book-item";
 export { Spinner } from "./spinner";
+export * from "./context"
