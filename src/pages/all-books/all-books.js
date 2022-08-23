@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Header, BookItem, Spinner, useBooksContext } from "../../components";
 
 export const AllBooksScreen = () => {
-  // const [books, setBooks] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { books, setBooks } = useBooksContext();
   const handleDeleteBookById = (id) => {
@@ -28,7 +27,6 @@ export const AllBooksScreen = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "resallbooks");
         setBooks(res?.data);
         setIsLoading(false);
       });

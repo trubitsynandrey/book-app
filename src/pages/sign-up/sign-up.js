@@ -22,7 +22,6 @@ export const SignUpScreen = () => {
   const navigate = useNavigate();
   const onSubmitHandle = async (e) => {
     e.preventDefault();
-    console.log("submitted");
     setIsError(false);
     setIsSuccess(false)
     if (email && name && password && repassword) {

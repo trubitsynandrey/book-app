@@ -16,7 +16,6 @@ export const BookItem = ({
   deleteBook,
   addFavorite,
 }) => {
-  // console.log(uid, 'authors:',authors?.join(","), 'descr:',description, 'title:', title, )
   const [isModal, setIsModal] = useState(false);
   const [isModalDelete, setIsModalDelete] = useState(false);
   const [isModalFavourite, setIsModalFavourite] = useState(false);
@@ -73,7 +72,6 @@ export const BookItem = ({
     });
     deleteBook(id)
   };
-console.log(favorite, 'fav')
   const isFavourite = favorite === 0 ? "bg-palewhite" : "bg-green"
 
   return (

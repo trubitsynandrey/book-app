@@ -20,9 +20,6 @@ export const AddbookScreen = () => {
       setInputValue(sessionStorage.getItem("inputValue"));
     }
     return () => {
-      // if (inputValue === "") {
-        // sessionStorage.removeItem("inputValue");
-      // }
     };
   }, []);
 
@@ -43,11 +40,6 @@ export const AddbookScreen = () => {
     }, 300);
     return () => {
       clearTimeout(typeToFetchThrottle);
-      // if (inputValue !== "") {
-      //   sessionStorage.setItem("inputValue", inputValue);
-      // } else {
-      //   sessionStorage.removeItem("inputValue");
-      // }
     };
   }, [inputValue]);
 

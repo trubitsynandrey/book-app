@@ -8,13 +8,10 @@ export const InfoBookScreen = () => {
   const { id } = useParams();
   useEffect(() => {
     if (books && id) {
-      console.log("here");
       const findedBook = books.find((book) => book.id == id);
       setBook(findedBook);
     }
   }, [books, id]);
-  console.log(book, "book");
-  console.log(id, "idinfo");
   return (
     <>
       <Header>

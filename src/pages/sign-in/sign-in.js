@@ -19,7 +19,6 @@ export const SignInScreen = () => {
 
   const onSubmitHandle = async (e) => {
     e.preventDefault();
-    console.log("submitted");
     setIsError(false);
     setIsLoading(true);
     if (email && password) {
@@ -56,7 +55,6 @@ export const SignInScreen = () => {
   const onChangeInput = (e, changeInput) => {
     changeInput(e.target.value);
   };
-console.log(isLoading, 'isLoading')
   return (
     <div className="relative px-[10%] h-[100vh] flex items-center">
       {isLoading && <Spinner />}

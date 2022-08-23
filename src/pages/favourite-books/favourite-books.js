@@ -25,7 +25,6 @@ export const FavouriteBooksScreen = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "resallbooks");
         setBooks(res?.data);
         setIsLoading(false);
       });
